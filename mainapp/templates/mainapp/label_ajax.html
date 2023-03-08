@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Upload</title>
+  </head>
+  <body>
+
+    <form name="upload-form" method="post" enctype="multipart/form-data">
+      <input type="file" name="file">
+      <button type="submit">Upload</button>
+    </form>
+
+    <script   src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+ <script   src="https://code.jquery.com/jquery-migrate-1.2.1.min.js" ></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+      // Register the listener for submit events.
+      $('form[name="upload-form"]').submit(function(evt) {
+        debugger
+        // Prevent the form from default behavior.
+        evt.preventDefault();
+        // Serialize the form data. The entire form is passed as a parameter.
+        const formData = new FormData($(this)[0]);
+        // Send the data via ajax.
+        $.ajax({
+          type: 'post',
+          url: 'http://127.0.0.1:8000/ajax_upload/',
+          data: formData,
+          contentType: false,
+          cache: false,
+          processData: false,
+        }).done(function(data) {
+            debugger
+          console.log('success');
+        }).fail(function(xhr, status, error) {
+          console.log('error');
+        });
+      });
+    });
+    </script>
+
+  </body>
+</html>
